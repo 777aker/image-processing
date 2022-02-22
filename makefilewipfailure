@@ -1,0 +1,68 @@
+# HW06
+EXE=hw06
+
+# Main target
+all: $(EXE)
+
+SUBDIR=CSCIx239
+
+#  Msys/MinGW
+ifeq "$(OS)" "Windows_NT"
+CFLG=-O3 -Wall -DUSEGLEW -I/mingw64/include/opencv4
+LIBS=-lopencv_videoio -lopencv_core -lglfw3 -lglew32 -lglu32 -lopengl32 -lm
+CLEAN=rm -f *.exe *.o *.a
+else
+#  OSX
+ifeq "$(shell uname)" "Darwin"
+CFLG=-O3 -Wall -Wno-deprecated-declarations  -DUSEGLEW -I/usr/include/opencv4
+LIBS=-lopencv_videoio -lopencv_core -lglfw -lglew -framework Cocoa -framework OpenGL -framework IOKit
+#  Linux/Unix/Solaris
+else
+CFLG=-O3 -Wall -I/usr/include/opencv4
+LIBS=-lopencv_videoio -lopencv_core -lglfw -lGLU -lGL -lm
+endif
+#  OSX/Linux/Unix/Solaris
+CLEAN=rm -f $(EXE) *.o *.a
+endif
+
+# Dependencies
+hw06.o: hw06.cpp CSCIx239/CSCIx239.h
+CSCIx239/fatal.o: CSCIx239/fatal.c CSCIx239/CSCIx239.h
+CSCIx239/errcheck.o: CSCIx239/errcheck.c CSCIx239/CSCIx239.h
+CSCIx239/print.o: CSCIx239/print.c CSCIx239/CSCIx239.h
+CSCIx239/axes.o: CSCIx239/axes.c CSCIx239/CSCIx239.h
+CSCIx239/loadtexbmp.o: CSCIx239/loadtexbmp.c CSCIx239/CSCIx239.h
+CSCIx239/loadobj.o: CSCIx239/loadobj.c CSCIx239/CSCIx239.h
+CSCIx239/projection.o: CSCIx239/projection.c CSCIx239/CSCIx239.h
+CSCIx239/lighting.o: CSCIx239/lighting.c CSCIx239/CSCIx239.h
+CSCIx239/elapsed.o: CSCIx239/elapsed.c CSCIx239/CSCIx239.h
+CSCIx239/fps.o: CSCIx239/fps.c CSCIx239/CSCIx239.h
+CSCIx239/shader.o: CSCIx239/shader.c CSCIx239/CSCIx239.h
+CSCIx239/noise.o: CSCIx239/noise.c CSCIx239/CSCIx239.h
+CSCIx239/cube.o: CSCIx239/cube.c CSCIx239/CSCIx239.h
+CSCIx239/sphere.o: CSCIx239/sphere.c CSCIx239/CSCIx239.h
+CSCIx239/cylinder.o: CSCIx239/cylinder.c CSCIx239/CSCIx239.h
+CSCIx239/torus.o: CSCIx239/torus.c CSCIx239/CSCIx239.h
+CSCIx239/icosahedron.o: CSCIx239/icosahedron.c CSCIx239/CSCIx239.h
+CSCIx239/teapot.o: CSCIx239/teapot.c CSCIx239/CSCIx239.h
+CSCIx239/mat4.o: CSCIx239/mat4.c CSCIx239/CSCIx239.h
+CSCIx239/initwin.o: CSCIx239/initwin.c CSCIx239/CSCIx239.h
+
+#  Create archive
+CSCIx239.a:CSCIx239/fatal.o CSCIx239/errcheck.o CSCIx239/print.o CSCIx239/axes.o CSCIx239/loadtexbmp.o CSCIx239/loadobj.o CSCIx239/projection.o CSCIx239/lighting.o CSCIx239/elapsed.o CSCIx239/fps.o CSCIx239/shader.o CSCIx239/noise.o CSCIx239/cube.o CSCIx239/sphere.o CSCIx239/cylinder.o CSCIx239/torus.o CSCIx239/icosahedron.o CSCIx239/teapot.o CSCIx239/mat4.o CSCIx239/initwin.o
+	ar -rcs $@ $^
+
+# Compile rules
+.c.o:
+	gcc -o $@ -c $(CFLG) -Idir CSCIx239 -I /usr/include/opencv4 $<
+.cpp.o:
+	g++ -o $@ -c $(CFLG) -Idir CSCIx239 -I /usr/include/opencv4 $<
+
+#  Link
+hw06:hw06.o   CSCIx239.a
+	g++ $(CFLG) -o $@ $^  -lopencv_videoio -lopencv_core $(LIBS)
+
+#  Clean
+clean:
+	$(CLEAN)
+	

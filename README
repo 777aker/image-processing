@@ -1,0 +1,30 @@
+hw06: Image processing
+
+Kelley Kelley
+CSCI4239/5239 Spring 2022
+
+Expanded from ex09 with some stuff from ex10
+It basically takes a few passes and makes image from
+camera a lot more pastel and sobel have a lot less random dark spots
+also you can increase shadows which makes red where the light is
+and blue where the shadows are (only mode 3)
+mode 0 is so you can compare sobel and what I did
+other modes are just testing and cool effects I left in
+
+Time spent: 7 hours
+
+Key bindings:
+  ESC exit
+  - go back one mode
+  + go forward one mode
+  arrows change position
+  pgup/pgdown zoom
+  s/w change shadow multiplier for mode 3
+
+Relies on OpenCV VideoIO module to snarf video
+
+On Ubuntu install OpenCV VideoIO with
+apt-get install libopencv-videoio-dev
+
+On MSYS2 install OpenCV with
+pacman -S mingw-w64-x86_64-opencv
