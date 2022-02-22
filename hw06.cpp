@@ -197,7 +197,7 @@ int capture() {
         id = glGetUniformLocation(shader, "img");
         glUniform1i(id, 4);
         id = glGetUniformLocation(shader, "img1");
-        glUniform1i(id, 2);
+        glUniform1i(id, 1);
         id = glGetUniformLocation(shader, "mode");
         glUniform1f(id, 5);
         glBindFramebuffer(GL_FRAMEBUFFER, framebuf[2]);

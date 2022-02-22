@@ -88,7 +88,7 @@ void main() {
 	} else if(mode == 5) {
 		vec4 pixel = texture2D(img,gl_TexCoord[0].st);
 		vec4 pixel1 = texture2D(img1,gl_TexCoord[0].st);
-		gl_FragColor = (pixel - pixel1);
+		gl_FragColor = (pixel - pixel1/2);
 	} else if(mode == 6) {
 		vec4 pixel = texture2D(img,gl_TexCoord[0].st);
 		vec4 pixel1 = texture2D(img1,gl_TexCoord[0].st);
